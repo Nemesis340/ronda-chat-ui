@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ronda Chat</title>
+</head>
+<body>
+  <h1>Welcome to Ronda Chat UI</h1>
+  <form id="chat-form">
+    <input type="text" id="message" placeholder="Type a message..." />
+    <button type="submit">Send</button>
+  </form>
+  <pre id="response"></pre>
+
+  <script>
+    const form = document.getElementById('chat-form');
+    const responseBox = document.getElementById('response');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = document.getElementById('message').value;
+      const res = await fetch('https://your-backend-endpoint/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      const data = await res.json();
+      responseBox.textContent = data.response || 'Error';
+    });
+  </script>
+</body>
+</html>
