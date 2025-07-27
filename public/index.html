@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head><title>Ronda UI</title></head>
+<script>
+  async function pingBackend() {
+    try {
+      const response = await fetch("http://localhost:5000/health");
+      const text = await response.text();
+      document.body.innerHTML += `<p>Backend says: ${text}</p>`;
+    } catch (error) {
+      document.body.innerHTML += `<p style="color:red">Backend unreachable</p>`;
+    }
+  }
+
+  pingBackend();
+</script>
+
 <body><h1>Hello from Ronda!</h1></body>
 </html>
